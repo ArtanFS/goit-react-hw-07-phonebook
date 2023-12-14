@@ -5,11 +5,12 @@ import Filter from './components/Filter';
 import css from './Container.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'components/services/API';
+import { selectError, selectIsLoading } from 'store/contacts/contactSelectors';
 
 const App = () => {
   const dispatch = useDispatch();
-  // const isLoading = useSelector(selectIsLoading);
-  // const error = useSelector(selectError);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(getContacts());
