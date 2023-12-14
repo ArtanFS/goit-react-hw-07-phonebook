@@ -9,9 +9,27 @@ const handlePending = state => {
   state.isLoading = true;
 };
 
-const handleRejected = (state, action) => {
+const handleRejected = (state, { payload }) => {
   state.isLoading = false;
-  state.error = action.payload;
+  state.error = payload;
+};
+
+const handleFulfilled = state => {
+  state.isLoading = false;
+  state.error = null;
+};
+
+const handleFulfilledGetAll = (state, { payload }) => {
+  state.items = payload;
+};
+
+const handleFulfilledAdd = (state, { payload }) => {
+  state.items.push(payload);
+};
+
+const handleFulfilledDelete = (state, { payload }) => {
+  const index = state.items.findIndex(contact => contact.id === payload.id);
+  state.items.splice(index, 1);
 };
 
 const contactSlice = createSlice({
@@ -23,30 +41,12 @@ const contactSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getContacts.pending, handlePending)
-      .addCase(getContacts.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        state.items = action.payload;
-      })
-      .addCase(getContacts.rejected, handleRejected)
-      .addCase(addContact.pending, handlePending)
-      .addCase(addContact.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        state.items.push(action.payload);
-      })
-      .addCase(addContact.rejected, handleRejected)
-      .addCase(deleteContact.pending, handlePending)
-      .addCase(deleteContact.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        const index = state.items.findIndex(
-          contact => contact.id === action.payload.id
-        );
-        state.items.splice(index, 1);
-      })
-      .addCase(deleteContact.rejected, handleRejected);
+      .addCase(getContacts.fulfilled, handleFulfilledGetAll)
+      .addCase(addContact.fulfilled, handleFulfilledAdd)
+      .addCase(deleteContact.fulfilled, handleFulfilledDelete)
+      .addMatcher(action => action.type.endsWith('pending'), handlePending)
+      .addMatcher(action => action.type.endsWith('rejected'), handleRejected)
+      .addMatcher(action => action.type.endsWith('fulfilled'), handleFulfilled);
   },
 });
 
