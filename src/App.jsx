@@ -12,6 +12,9 @@ const App = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
+  console.log('error :>> ', error);
+  console.log('isLoading :>> ', isLoading);
+
   useEffect(() => {
     dispatch(getContacts());
   }, [dispatch]);
