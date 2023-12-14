@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContactAction } from 'store/contacts/contactSlice';
 import { selectContacts } from 'store/contacts/contactSelectors';
+import { addContact } from 'components/services/API';
 import css from './ContactForm.module.css';
 
 const ContactForm = () => {
-  const [value, setValue] = useState({ name: '', number: '' });
+  const [value, setValue] = useState({
+    name: '',
+    phone: '',
+  });
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
@@ -18,8 +21,8 @@ const ContactForm = () => {
       alert(`${value.name} is already in contacts.`);
       return;
     }
-    dispatch(addContactAction(value));
-    setValue({ name: '', number: '' });
+    dispatch(addContact(value));
+    setValue({ name: '', phone: '' });
   };
 
   const handleChange = ({ target: { value, name } }) => {
@@ -41,12 +44,12 @@ const ContactForm = () => {
         />
       </div>
       <div className={css.contact_form_item}>
-        <label htmlFor="inputNumber">Number</label>
+        <label htmlFor="inputPhone">Phone</label>
         <input
-          name="number"
+          name="phone"
           type="tel"
-          id="inputNumber"
-          value={value.number}
+          id="inputPhone"
+          value={value.phone}
           onChange={handleChange}
           required
           pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
