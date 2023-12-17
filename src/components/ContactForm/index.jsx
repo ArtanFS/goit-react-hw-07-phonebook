@@ -31,29 +31,33 @@ const ContactForm = () => {
 
   return (
     <form className={css.contact_form} onSubmit={handleSubmit}>
-      <div className={css.contact_form_item}>
-        <label htmlFor="inputName">Name</label>
-        <input
-          name="name"
-          type="text"
-          id="inputName"
-          value={value.name}
-          onChange={handleChange}
-          required
-          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        />
-      </div>
-      <div className={css.contact_form_item}>
-        <label htmlFor="inputPhone">Phone</label>
-        <input
-          name="phone"
-          type="tel"
-          id="inputPhone"
-          value={value.phone}
-          onChange={handleChange}
-          required
-          pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
-        />
+      <div className={css.input_wrapper}>
+        <div className={css.contact_form_item}>
+          <label htmlFor="inputName">Name</label>
+          <input
+            name="name"
+            type="text"
+            id="inputName"
+            value={value.name}
+            onChange={handleChange}
+            required
+            pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            placeholder="Enter Name"
+          />
+        </div>
+        <div className={css.contact_form_item}>
+          <label htmlFor="inputPhone">Phone</label>
+          <input
+            name="phone"
+            type="tel"
+            id="inputPhone"
+            value={value.phone}
+            onChange={handleChange}
+            required
+            pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
+            placeholder="012-345-6789"
+          />
+        </div>
       </div>
       <button type="submit">Add contact</button>
     </form>

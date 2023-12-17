@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { MdClose } from 'react-icons/md';
 import { deleteContact } from 'components/services/API';
 import css from './ContactListItem.module.css';
 
@@ -11,8 +12,11 @@ const ContactListItem = ({ contact }) => {
         <p>
           {contact.name}: {contact.phone}
         </p>
-        <button onClick={() => dispatch(deleteContact(contact.id))}>
-          Delete
+        <button
+          className={css.btn}
+          onClick={() => dispatch(deleteContact(contact.id))}
+        >
+          <MdClose size={24} />
         </button>
       </div>
     </li>

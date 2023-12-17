@@ -1,19 +1,18 @@
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Filter from './components/Filter';
-import css from './Container.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'components/services/API';
+import Loader from 'components/Loader';
+import Error from 'components/Error';
 import { selectError, selectIsLoading } from 'store/contacts/contactSelectors';
+import { getContacts } from 'components/services/API';
+import css from './Container.module.css';
 
 const App = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-
-  console.log('error :>> ', error);
-  console.log('isLoading :>> ', isLoading);
 
   useEffect(() => {
     dispatch(getContacts());
@@ -25,6 +24,8 @@ const App = () => {
       <ContactForm />
       <h2>Contacts</h2>
       <Filter />
+      {isLoading && <Loader />}
+      {error && <Error err={error} />}
       <ContactList />
     </div>
   );
