@@ -1,10 +1,10 @@
-import { Text, Wrapper } from './Error.styled';
+import css from './Error.module.css';
 
 const Error = ({ err }) => {
   return (
-    <Wrapper>
-      <Text>An error occurred: {err}</Text>
-    </Wrapper>
+    <div className={css.wrapper}>
+      <p className={css.text}>An error occurred: {err}</p>
+    </div>
   );
 };
 
