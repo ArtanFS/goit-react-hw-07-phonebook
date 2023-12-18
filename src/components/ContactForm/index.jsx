@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'store/contacts/contactSelectors';
-import { addContact } from 'components/services/API';
+import { addContact } from 'store/contacts/operations';
 import css from './ContactForm.module.css';
 
 const ContactForm = () => {
@@ -41,7 +41,7 @@ const ContactForm = () => {
             value={value.name}
             onChange={handleChange}
             required
-            pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            pattern="^[a-zA-Zа-яА-ЯіІїЇєЄ’]+(([' \-][a-zA-Zа-яА-ЯіІїЇєЄ’])?[a-zA-Zа-яА-ЯіІїЇєЄ’]*)*$"
             placeholder="Enter Name"
           />
         </div>

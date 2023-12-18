@@ -6,7 +6,7 @@ import Filter from './components/Filter';
 import Loader from 'components/Loader';
 import Error from 'components/Error';
 import { selectError, selectIsLoading } from 'store/contacts/contactSelectors';
-import { getContacts } from 'components/services/API';
+import { getContacts } from 'store/contacts/operations';
 import css from './Container.module.css';
 
 const App = () => {
